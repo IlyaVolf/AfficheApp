@@ -5,6 +5,4 @@ import scientists.house.affiche.app.model.affiche.entities.AffichePost
 interface AfficheSource {
 
     suspend fun getAffichePosts(): List<AffichePost>
-
-    suspend fun setPlannedAffichePost(postId: Long, isSelected: Boolean)
 }

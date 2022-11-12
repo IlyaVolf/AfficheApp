@@ -7,8 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import scientists.house.affiche.app.model.affiche.AfficheSource
 import scientists.house.affiche.app.model.news.NewsSource
 import scientists.house.affiche.app.model.planned.PlannedSource
-import scientists.house.affiche.sources.affiche.RetrofitAfficheSource
-import scientists.house.affiche.sources.news.RetrofitNewsSource
+import scientists.house.affiche.sources.affiche.JsoupAfficheSource
+import scientists.house.affiche.sources.news.JsoupNewsSource
 import scientists.house.affiche.sources.planned.RoomPlannedSource
 
 /**
@@ -20,7 +20,7 @@ abstract class SourcesModule {
 
     @Binds
     abstract fun bindAfficheSource(
-        retrofitAfficheSource: RetrofitAfficheSource
+        jsoupAfficheSource: JsoupAfficheSource
     ): AfficheSource
 
     @Binds
@@ -30,6 +30,6 @@ abstract class SourcesModule {
 
     @Binds
     abstract fun bindNewsSource(
-        retrofitNewsSource: RetrofitNewsSource
+        jsoupNewsSource: JsoupNewsSource
     ): NewsSource
 }

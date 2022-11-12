@@ -6,11 +6,7 @@ import scientists.house.affiche.app.model.affiche.entities.AffichePost
 import scientists.house.affiche.app.model.planned.PlannedSource
 
 @Singleton
-class RoomPlannedSource @Inject constructor(
-    // config: RetrofitConfig
-) : PlannedSource {
-    // todo ad room config
-    // private val plannedApi = retrofit.create(PlannedApi::class.java)
+class RoomPlannedSource @Inject constructor() : PlannedSource {
 
     override suspend fun getPlannedAffichePosts(): List<AffichePost> {
         TODO("Not yet implemented")
