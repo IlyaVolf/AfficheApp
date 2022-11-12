@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@id/affiche"
+        android:title="@string/affiche_title"
+        android:icon="@drawable/ic_affiche"/>
+    <item android:id="@id/planned"
+        android:title="@string/planned_title"
+        android:icon="@drawable/ic_planned" />
+    <item android:id="@id/news"
+        android:title="@string/news_title"
+        android:icon="@drawable/ic_news"/>
+
+</menu>

@@ -1,0 +1,29 @@
+<resources>
+
+    <!-- Common -->
+    <string name="app_name">Афиша</string>
+    <string name="action_try_again">Повторить</string>
+
+    <!-- Splash -->
+    <string name="splash_please_wait">Пожалуйста, подождите</string>
+
+    <!-- Affiche -->
+    <string name="affiche_title">Афиша</string>
+
+    <!-- Affiche post details -->
+    <string name="affiche_post_details_title">{postTitle}</string>
+
+    <!-- Planned -->
+    <string name="planned_title">Сохраненные</string>
+
+    <!-- News -->
+    <string name="news_title">Новости</string>
+
+    <!-- News details -->
+    <string name="news_details_title">{newsItemTitle}</string>
+
+    <!-- Network errors -->
+    <string name="network_connection_error">Невозможно подключиться к серверу</string>
+    <string name="network_internal_error">Внутрення ошибка. Пожалуйста, повторите позже</string>
+
+</resources>
