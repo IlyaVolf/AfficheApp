@@ -26,4 +26,7 @@
     <string name="network_connection_error">Невозможно подключиться к серверу</string>
     <string name="network_internal_error">Внутрення ошибка. Пожалуйста, повторите позже</string>
 
+    <!-- Errors -->
+    <string name="error_default_load_error_body">Проверьте соединение с интернетом или зайдите позже</string>
+
 </resources>

@@ -28,19 +28,17 @@ class AfficheViewModel @Inject constructor(
         load()
     }
 
-    private fun load() {
-        viewModelScope.launch(IO) {
-            try {
-                val data = afficheRepository.getAffichePosts()
-                logger.log("AHRI", "$data")
+    private fun load() = viewModelScope.launch(IO) {
+        try {
+            val data = afficheRepository.getAffichePosts()
+            logger.log("AHRI", "$data")
 
-                withContext(Dispatchers.Main) {
-                    _affichePosts.value = DataHolder.ready(data)
-                }
-            } catch (e: Exception) {
-                withContext(Dispatchers.Main) {
-                    _affichePosts.value = DataHolder.error(e)
-                }
+            withContext(Dispatchers.Main) {
+                _affichePosts.value = DataHolder.ready(data)
+            }
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
+                _affichePosts.value = DataHolder.error(e)
             }
         }
     }
