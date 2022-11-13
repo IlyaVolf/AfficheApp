@@ -8,7 +8,9 @@ data class AffichePost(
     val imgUrl: String?,
     val performanceNumber: String?,
     val performanceMonth: String?
-)
+) {
+    val performanceDate get() = "$performanceNumber $performanceMonth"
+}
 
 fun List<AffichePostSource>.toUiAffichePosts(): List<AffichePost> = map {
     AffichePost(

@@ -5,7 +5,6 @@ import android.view.View
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LifecycleObserver
 import scientists.house.affiche.app.utils.observeEvent
 
 abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
@@ -23,10 +22,11 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
+        setupViews()
         observeViewModel()
     }
 
-    protected open fun observeViewModel() {
+    open fun setupViews() {}
 
-    }
+    open fun observeViewModel() {}
 }

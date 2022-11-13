@@ -8,6 +8,7 @@ import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.FragmentAfficheBinding
 import scientists.house.affiche.app.model.DataHolder
 import scientists.house.affiche.app.screens.base.BaseFragment
+import scientists.house.affiche.app.screens.main.tabs.affiche.list.AfficheAdapter
 import scientists.house.affiche.app.utils.visible
 
 @AndroidEntryPoint
@@ -16,6 +17,12 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
     override val viewModel by viewModels<AfficheViewModel>()
 
     private lateinit var binding: FragmentAfficheBinding
+
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        AfficheAdapter(
+            onItemClick = { viewModel.onAffichePostClicked(it) }
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -34,6 +41,9 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
                     binding.faILoading.root.visible = false
                     binding.faIError.root.visible = false
                     binding.faClContent.visible = true
+
+                    binding.faRvAffichePosts.adapter = adapter
+                    adapter.setupItems(holder.data)
                 }
                 is DataHolder.ERROR -> {
                     binding.faILoading.root.visible = false
@@ -43,4 +53,6 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
             }
         }
     }
+
+    override fun setupViews() {}
 }
