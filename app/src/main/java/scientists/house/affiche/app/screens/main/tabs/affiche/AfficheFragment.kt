@@ -18,7 +18,5 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfficheBinding.bind(view)
-
-        binding.resultView.setTryAgainAction { viewModel.reload() }
     }
 }

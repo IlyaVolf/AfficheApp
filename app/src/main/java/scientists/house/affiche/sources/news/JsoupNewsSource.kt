@@ -3,7 +3,7 @@ package scientists.house.affiche.sources.news
 import javax.inject.Inject
 import javax.inject.Singleton
 import scientists.house.affiche.app.model.news.NewsSource
-import scientists.house.affiche.app.model.news.entities.NewsItem
+import scientists.house.affiche.sources.news.entities.NewsItem
 
 @Singleton
 class JsoupNewsSource @Inject constructor() : NewsSource {
