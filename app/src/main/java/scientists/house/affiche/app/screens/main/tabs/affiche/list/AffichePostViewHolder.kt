@@ -1,11 +1,10 @@
 package scientists.house.affiche.app.screens.main.tabs.affiche.list
 
-import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.ItemAffichePostBinding
+import scientists.house.affiche.app.extensions.loadImage
 import scientists.house.affiche.app.model.affiche.entities.AffichePost
 import scientists.house.affiche.app.screens.base.BaseViewHolder
-import scientists.house.affiche.app.utils.ResourcesUtils
-import scientists.house.affiche.app.utils.image_loader.ImageLoader
+import scientists.house.affiche.app.utils.visible
 
 class AffichePostViewHolder(
     private val viewBinding: ItemAffichePostBinding,
@@ -14,23 +13,30 @@ class AffichePostViewHolder(
 
     override fun bindItem(item: AffichePost) {
         viewBinding.apply {
+            resetView()
+
             root.setOnClickListener {
                 onItemClick(item)
             }
 
-            loadAffichePostPreview(item.imgUrl.orEmpty())
-            iapMtvTitle.text = item.title
-            iapMtvDate.text = item.performanceDate
+            iapfIvPost.loadImage(item.imgUrl.orEmpty())
+
+            item.title?.let {
+                iapMtvTitle.text = it
+            } ?: run {
+                iapMtvTitle.visible = false
+            }
+
+            item.performanceDate?.let {
+                iapMtvDate.text = it
+            } ?: run {
+                iapMtvDate.visible = false
+            }
         }
     }
 
-    private fun loadAffichePostPreview(url: String) {
-        ImageLoader
-            .load(url)
-            .error(R.drawable.img_not_found)
-            .placeholder(R.drawable.img_not_found)
-            .centerCrop()
-            .roundedCorners(ResourcesUtils.getPxByDp(4f))
-            .into(viewBinding.iapfIvPost)
+    private fun ItemAffichePostBinding.resetView() {
+        iapMtvTitle.visible = true
+        iapMtvDate.visible = true
     }
 }

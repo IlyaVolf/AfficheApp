@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/newsDetailsFragment"
         android:name="scientists.house.affiche.app.screens.main.tabs.news.NewsDetailsFragment"
-        android:label="@string/affiche_post_details_title"
+        android:label="{newsItemTitle}"
         tools:layout="@layout/fragment_news_details">
         <argument
             android:name="newsItemTitle"

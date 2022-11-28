@@ -1,16 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     tools:context=".screens.main.tabs.affiche.AffichePostDetailsFragment">
 
-    <TextView
+    <!--<com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/fapdMtToolbar"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Affiche post details fragment" />
+        android:layout_height="wrap_content"
+        tools:title="Заголовок афишы" />-->
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/fapdLlContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvTitle"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="StundUp" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvDate"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="26 Ноября, суббота" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvAge"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="18+" />
+
+        <ImageView
+            android:id="@+id/fapdIvPost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvPlace"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Большой зал" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvTime"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="19:00" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvPrice"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="от 1000 руб." />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/fapdMbBuy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/affiche_post_details_buy" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/fapdMtvAbout"
+            style="@style/TextAppearance.AppCompat.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="информация о событии" />
+
+    </LinearLayout>
+
+    <include
+        android:id="@+id/fapdILoading"
+        layout="@layout/view_loading"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/fapdIError"
+        layout="@layout/view_error"
+        android:visibility="gone" />
+
+</LinearLayout>

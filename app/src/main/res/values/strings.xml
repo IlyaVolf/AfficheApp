@@ -11,7 +11,7 @@
     <string name="affiche_title">Афиша</string>
 
     <!-- Affiche post details -->
-    <string name="affiche_post_details_title">{postTitle}</string>
+    <string name="affiche_post_details_buy">купить билет</string>
 
     <!-- Planned -->
     <string name="planned_title">Сохраненные</string>
@@ -28,5 +28,6 @@
 
     <!-- Errors -->
     <string name="error_default_load_error_body">Проверьте соединение с интернетом или зайдите позже</string>
+    <string name="error_loading">Ошибка при загрузке</string>
 
 </resources>

@@ -3,10 +3,12 @@ package scientists.house.affiche.app.screens.main.tabs.affiche
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.FragmentAfficheBinding
 import scientists.house.affiche.app.model.DataHolder
+import scientists.house.affiche.app.model.affiche.entities.AffichePost
 import scientists.house.affiche.app.screens.base.BaseFragment
 import scientists.house.affiche.app.screens.main.tabs.affiche.list.AfficheAdapter
 import scientists.house.affiche.app.utils.visible
@@ -18,15 +20,21 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
 
     private lateinit var binding: FragmentAfficheBinding
 
-    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
-        AfficheAdapter(
-            onItemClick = { viewModel.onAffichePostClicked(it) }
+    private val onItemClick: (AffichePost) -> Unit = { affichePost ->
+        val direction = AfficheFragmentDirections.actionAffichePostToAffichePostDetails(
+            postTitle = affichePost.title.orEmpty(),
+            postLink = affichePost.detailsLink.orEmpty()
         )
+        findNavController().navigate(direction)
+    }
+
+    private val adapter by lazy(LazyThreadSafetyMode.NONE) {
+        AfficheAdapter(onItemClick)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding = FragmentAfficheBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun observeViewModel() {
@@ -54,5 +62,10 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
         }
     }
 
-    override fun setupViews() {}
+    override fun setupViews() {
+        super.setupViews()
+        binding.faIError.veMbTryAgain.setOnClickListener {
+            viewModel.load()
+        }
+    }
 }

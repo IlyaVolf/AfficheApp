@@ -1,11 +1,12 @@
 package scientists.house.affiche.sources.affiche
 
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.jsoup.Jsoup
 import scientists.house.affiche.app.Consts.DUSORAN_EVENTS_URL
 import scientists.house.affiche.app.Consts.DUSORAN_URL
+import javax.inject.Inject
+import javax.inject.Singleton
 import scientists.house.affiche.app.model.affiche.AfficheSource
+import scientists.house.affiche.sources.affiche.entitites.AfficheDetailedPost
 import scientists.house.affiche.sources.affiche.entitites.AffichePost
 
 @Singleton
@@ -27,25 +28,43 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                 .attr("src")
                 .let { url -> "$DUSORAN_URL$url" }
 
-            val performanceNumber = element
+            val number = element
                 .select("div[class=srh-card-event-date]")
                 .select("span")
                 .text()
 
-            val performanceMonth = element
+            val month = element
                 .select("a.text-lowercase")
                 .text()
 
             val affichePost = AffichePost(
                 title = title,
                 imgUrl = imgUrl,
-                performanceNumber = performanceNumber,
-                performanceMonth = performanceMonth
+                number = number,
+                month = month,
+                // todo
+                detailsLink = null
             )
 
             affichePosts.add(affichePost)
         }
 
         return affichePosts
+    }
+
+    // todo
+    override suspend fun getDetailedAffichePost(link: String): AfficheDetailedPost {
+        return AfficheDetailedPost(
+            title = "StundUp",
+            imgUrl = "",
+            number = "26",
+            month = "ноября, суббота",
+            age = "18+",
+            place = "большой зал",
+            time = "19:00",
+            price = "от 1000 руб.",
+            buyLink = "",
+            about = "Информация о событии"
+        )
     }
 }
