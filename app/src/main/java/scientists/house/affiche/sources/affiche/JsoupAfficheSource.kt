@@ -1,10 +1,10 @@
 package scientists.house.affiche.sources.affiche
 
+import javax.inject.Inject
+import javax.inject.Singleton
 import org.jsoup.Jsoup
 import scientists.house.affiche.app.Consts.DUSORAN_EVENTS_URL
 import scientists.house.affiche.app.Consts.DUSORAN_URL
-import javax.inject.Inject
-import javax.inject.Singleton
 import scientists.house.affiche.app.model.affiche.AfficheSource
 import scientists.house.affiche.sources.affiche.entitites.AfficheDetailedPost
 import scientists.house.affiche.sources.affiche.entitites.AffichePost
@@ -37,13 +37,18 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                 .select("a.text-lowercase")
                 .text()
 
+            val detailsLink = element
+                .select("div[class=srh-card-event-footer]")
+                .select("a.text-dark")
+                .attr("href")
+                .let { url -> "$DUSORAN_URL$url" }
+
             val affichePost = AffichePost(
                 title = title,
                 imgUrl = imgUrl,
                 number = number,
                 month = month,
-                // todo
-                detailsLink = null
+                detailsLink = detailsLink
             )
 
             affichePosts.add(affichePost)
@@ -54,17 +59,55 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
 
     // todo
     override suspend fun getDetailedAffichePost(link: String): AfficheDetailedPost {
+        val document = Jsoup.connect(link).get()
+        val element = document.select("section[class=srh-event -detail]")
+
+        val title = element
+            .select("h1[class=title]")
+            .text()
+
+        val imgUrl = element
+            .select("div[class=srh-jumbotron-media]")
+            .select("img")
+            .attr("src")
+            .let { url -> "$DUSORAN_URL$url" }
+
+        val date = element
+            .select("h2[class=subtitle]")
+            .select("span[class=text-lowercase srh-color-primary-0]")
+            .text()
+
+        val weekDay = element
+            .select("h2[class=subtitle]")
+            .select("span[class=text-lowercase]")
+            .text()
+
+        /*val place = element
+            .select("dev[class=srh-factoid-content]")
+            .select("figure")
+            .select("div")
+            .text()*/
+
+        val age = element
+            .select("div[class=srh-jumbotron-age-rating h1 mb-0]")
+            .text()
+
+        val about = element
+            .select("div[class=srh-blog-item]")
+            .select("p")
+            .text()
+
         return AfficheDetailedPost(
-            title = "StundUp",
-            imgUrl = "",
-            number = "26",
-            month = "ноября, суббота",
-            age = "18+",
-            place = "большой зал",
-            time = "19:00",
-            price = "от 1000 руб.",
-            buyLink = "",
-            about = "Информация о событии"
+            title = title,
+            imgUrl = imgUrl,
+            date = date,
+            weekDay = weekDay,
+            age = age,
+            place = null,
+            time = null,
+            price = null,
+            buyLink = null,
+            about = about
         )
     }
 }

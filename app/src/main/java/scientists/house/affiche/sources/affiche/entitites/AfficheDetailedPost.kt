@@ -3,8 +3,8 @@ package scientists.house.affiche.sources.affiche.entitites
 data class AfficheDetailedPost(
     val title: String?,
     val imgUrl: String?,
-    val number: String?,
-    val month: String?,
+    val date: String?,
+    val weekDay: String?,
     val age: String?,
     val place: String?,
     val time: String?,

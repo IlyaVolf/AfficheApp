@@ -21,8 +21,8 @@ fun AfficheDetailedPostSource.toUiAfficheDetailedPosts(): AfficheDetailedPost =
     AfficheDetailedPost(
         title = title,
         imgUrl = imgUrl,
-        number = number,
-        month = month,
+        number = date,
+        month = weekDay,
         age = age,
         place = place,
         time = time,

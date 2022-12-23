@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/affichePostDetailsFragment"
         android:name="scientists.house.affiche.app.screens.main.tabs.affiche.AffichePostDetailsFragment"
-        android:label="{postTitle}"
+        android:label="О мероприятии"
         tools:layout="@layout/fragment_affiche_post_details">
         <argument
             android:name="postTitle"
