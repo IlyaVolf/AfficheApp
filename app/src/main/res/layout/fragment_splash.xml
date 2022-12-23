@@ -8,23 +8,16 @@
     tools:background="@drawable/splash"
     tools:context="scientists.house.affiche.app.screens.splash.SplashFragment">
 
-    <ProgressBar
-        android:id="@+id/loadingIndicator"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:indeterminateTint="@color/white" />
-
     <TextView
         android:id="@+id/pleaseWaitTextView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:layout_height="match_parent"
+        android:textSize="24sp"
         android:textStyle="bold"
         android:fontFamily="casual"
         android:gravity="center"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="8dp"
+        android:layout_gravity="center"
         android:textColor="@color/white"
-        android:text="@string/splash_please_wait"/>
+        android:text="Афиша всегда рядом :з"/>
 
 </LinearLayout>

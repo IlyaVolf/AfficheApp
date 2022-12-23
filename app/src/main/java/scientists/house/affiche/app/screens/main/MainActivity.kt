@@ -1,19 +1,29 @@
 package scientists.house.affiche.app.screens.main
 
+import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.ActivityMainBinding
+import scientists.house.affiche.app.screens.base.NotificationService
 import scientists.house.affiche.app.screens.main.tabs.TabsFragment
+import java.util.*
+
 
 /**
  * Container for all screens in the app.
@@ -55,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         onNavControllerActivated(navController)
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
+
+        requestPermission()
     }
 
     override fun onDestroy() {
@@ -110,4 +122,61 @@ class MainActivity : AppCompatActivity() {
     private fun getMainNavigationGraphId(): Int = R.navigation.main_graph
 
     private fun getTabsDestination(): Int = R.id.tabsFragment
+
+    private fun checkPermission(): Boolean {
+        //this function will return a boolean
+        //true: if we have permission
+        //false if not
+        if (
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED ||
+            ActivityCompat.checkSelfPermission(
+                this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            return true
+        }
+
+        return false
+    }
+
+    private fun requestPermission() {
+        //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
+        ActivityCompat.requestPermissions(
+            this,
+            arrayOf(
+                android.Manifest.permission.ACCESS_COARSE_LOCATION,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ),
+            PERMISSION_ID
+        )
+    }
+
+    private fun isLocationEnabled(): Boolean {
+        //this function will return to us the state of the location service
+        //if the gps or the network provider is enabled then it will return true otherwise it will return false
+        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
+            LocationManager.NETWORK_PROVIDER
+        )
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == PERMISSION_ID) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Log.d("Debug:", "You have the Permission")
+            }
+        }
+    }
+
+    companion object {
+        const val PERMISSION_ID = 123
+    }
 }

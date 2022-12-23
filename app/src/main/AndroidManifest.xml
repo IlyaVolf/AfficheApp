@@ -3,6 +3,8 @@
     package="scientists.house.affiche.app">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -26,6 +28,17 @@
 
         <activity android:name=".screens.main.MainActivity"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar"/>
+
+        <service
+            android:name=".screens.base.NotificationService"
+            android:enabled="true"
+            android:label="@string/app_name"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="your.app.domain.NotificationService" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </service>
 
     </application>
 

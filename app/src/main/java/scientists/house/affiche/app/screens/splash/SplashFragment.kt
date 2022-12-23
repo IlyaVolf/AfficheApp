@@ -24,10 +24,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         renderAnimations()
 
-        viewModel.launchMainScreenEvent.observeEvent(viewLifecycleOwner) { launchMainScreen(it) }
+        viewModel.launchMainScreenEvent.observeEvent(viewLifecycleOwner) { launchMainScreen() }
     }
 
-    private fun launchMainScreen(isSignedIn: Boolean) {
+    private fun launchMainScreen() {
         val intent = Intent(requireContext(), MainActivity::class.java)
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -36,12 +36,6 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     }
 
     private fun renderAnimations() {
-        binding.loadingIndicator.alpha = 0f
-        binding.loadingIndicator.animate()
-            .alpha(0.7f)
-            .setDuration(1000)
-            .start()
-
         binding.pleaseWaitTextView.alpha = 0f
         binding.pleaseWaitTextView.animate()
             .alpha(1f)
