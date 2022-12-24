@@ -67,6 +67,7 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
 
         requestPermission()
+        setupService()
     }
 
     override fun onDestroy() {
@@ -173,6 +174,12 @@ class MainActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("Debug:", "You have the Permission")
             }
+        }
+    }
+
+    private fun setupService() {
+        if (checkPermission() && isLocationEnabled()) {
+            startService(Intent(this, NotificationService::class.java))
         }
     }
 
