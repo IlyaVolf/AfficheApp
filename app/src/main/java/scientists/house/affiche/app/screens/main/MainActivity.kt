@@ -1,9 +1,11 @@
 package scientists.house.affiche.app.screens.main
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.LocationManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,8 +22,12 @@ import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.ActivityMainBinding
-import scientists.house.affiche.app.screens.base.NotificationService
 import scientists.house.affiche.app.screens.main.tabs.TabsFragment
+import scientists.house.affiche.app.trackLocation.Actions
+import scientists.house.affiche.app.trackLocation.EndlessService
+import scientists.house.affiche.app.trackLocation.ServiceState
+import scientists.house.affiche.app.trackLocation.getServiceState
+import scientists.house.affiche.app.trackLocation.log
 import java.util.*
 
 
@@ -66,8 +72,26 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
 
-        requestPermission()
-        setupService()
+        if (checkPermission().not()) {
+            requestPermission()
+        }
+        if (checkPermission() && isLocationEnabled()) {
+            actionOnService(Actions.START)
+        }
+    }
+
+    private fun actionOnService(action: Actions) {
+        if (getServiceState(this) == ServiceState.STOPPED && action == Actions.STOP) return
+        Intent(this, EndlessService::class.java).also {
+            it.action = action.name
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                log("Starting the service in >=26 Mode")
+                startForegroundService(it)
+                return
+            }
+            log("Starting the service in < 26 Mode")
+            startService(it)
+        }
     }
 
     override fun onDestroy() {
@@ -135,7 +159,7 @@ class MainActivity : AppCompatActivity() {
             ) == PackageManager.PERMISSION_GRANTED ||
             ActivityCompat.checkSelfPermission(
                 this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                ACCESS_FINE_LOCATION
             ) == PackageManager.PERMISSION_GRANTED
         ) {
             return true
@@ -150,7 +174,7 @@ class MainActivity : AppCompatActivity() {
             this,
             arrayOf(
                 android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
+                ACCESS_FINE_LOCATION
             ),
             PERMISSION_ID
         )
@@ -174,12 +198,6 @@ class MainActivity : AppCompatActivity() {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Log.d("Debug:", "You have the Permission")
             }
-        }
-    }
-
-    private fun setupService() {
-        if (checkPermission() && isLocationEnabled()) {
-            startService(Intent(this, NotificationService::class.java))
         }
     }
 

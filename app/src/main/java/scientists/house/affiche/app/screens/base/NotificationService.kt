@@ -68,7 +68,7 @@ class NotificationService : Service() {
 
     override fun onDestroy() {
         Log.d("Debug", "onDestroy")
-        //stopTimer()
+        stopTimer()
         super.onDestroy()
     }
 
@@ -81,10 +81,10 @@ class NotificationService : Service() {
     }
 
     private fun checkCircleArea() {
-        if ((currentLatitude <= HOME_LATITUDE + LATITUDE_SPREAD) &&
-            (currentLatitude >= HOME_LATITUDE - LATITUDE_SPREAD) &&
-            (currentLongitude <= HOME_LONGITUDE + LONGITUDE_SPREAD) &&
-            (currentLongitude >= HOME_LONGITUDE - LONGITUDE_SPREAD)
+        if ((currentLatitude <= NSU_LATITUDE + LATITUDE_SPREAD) &&
+            (currentLatitude >= NSU_LATITUDE - LATITUDE_SPREAD) &&
+            (currentLongitude <= NSU_LONGITUDE + LONGITUDE_SPREAD) &&
+            (currentLongitude >= NSU_LONGITUDE - LONGITUDE_SPREAD)
         ) {
             Log.d("Debug", "sendNotification")
             sendNotification()
@@ -158,26 +158,8 @@ class NotificationService : Service() {
         notificationManager.notify(0, notification)
     }
 
-    /*override fun onTaskRemoved(rootIntent: Intent?) {
-        Log.d("Debug", "onTaskRemoved")
-        val restartServiceIntent = Intent(applicationContext, this.javaClass)
-        restartServiceIntent.setPackage(packageName)
-
-        val restartServicePendingIntent = PendingIntent.getService(
-            applicationContext,
-            1,
-            restartServiceIntent,
-            PendingIntent.FLAG_ONE_SHOT
-        )
-        val alarmService = applicationContext.getSystemService(ALARM_SERVICE) as AlarmManager
-        alarmService[AlarmManager.ELAPSED_REALTIME, SystemClock.elapsedRealtime() + 1000] =
-            restartServicePendingIntent
-
-        super.onTaskRemoved(rootIntent)
-    }*/
-
     companion object {
-        const val SECS = 5
+        const val SECS = 15
         const val DUSORAN_LATITUDE = 54.836294
         const val DUSORAN_LONGITUDE = 83.102099
 
