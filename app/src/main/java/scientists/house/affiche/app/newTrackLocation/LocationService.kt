@@ -56,7 +56,7 @@ class LocationService : Service() {
             .setStyle(
                 NotificationCompat.BigTextStyle()
                     .bigText(
-                        "${upcoming.second} состоится мероприятие\n${upcoming.first}.\n" +
+                        "${upcoming.second} состоится мероприятие\"${upcoming.first}\".\n" +
                                 "Ждём Вас!"
                     )
             )
