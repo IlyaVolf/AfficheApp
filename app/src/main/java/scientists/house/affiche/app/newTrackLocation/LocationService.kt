@@ -48,7 +48,7 @@ class LocationService : Service() {
 
         notification = NotificationCompat.Builder(this, channelId)
             .setContentText(
-                "${upcoming.second} состоится мероприятие\"${upcoming.first}\".\n" +
+                "${upcoming.second} состоится мероприятие \"${upcoming.first}\".\n" +
                         "Ждём Вас!"
             )
             .setSmallIcon(R.drawable.ic_stat_name)
