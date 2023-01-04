@@ -17,7 +17,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.NavTabs"
+        android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar"
         android:usesCleartextTraffic="true">
 
         <activity
@@ -43,11 +43,8 @@
             </intent-filter>
         </receiver>
 
-        <service
-            android:name=".trackLocation.EndlessService"
-            android:enabled="true"
-            android:exported="false">
-        </service>
+        <service android:name=".newTrackLocation.LocationService"
+            android:foregroundServiceType="location" />
 
     </application>
 

@@ -9,6 +9,8 @@
     <color name="grey">#404040</color>
     <color name="light_grey">#5E5E5E</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="design_default_color_primary">#B10000</color>
+    <color name="design_default_color_primary_dark">#780000</color>
 
     <color name="defaultDashboardColor">#008800</color>
 </resources>

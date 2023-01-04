@@ -45,7 +45,7 @@ class LocationService: Service() {
         val notification = NotificationCompat.Builder(this, "location")
             .setContentTitle("Tracking location...")
             .setContentText("Location: null")
-            .setSmallIcon(R.drawable.ic_launcher_background)
+            .setSmallIcon(R.drawable.ic_stat_name)
             .setOngoing(true)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -53,9 +53,9 @@ class LocationService: Service() {
         Log.d("Debug", "АЛЁ")
 
         locationClient
-            .getLocationUpdates(1000L)
+            .getLocationUpdates(30000L)
             .catch { e -> e.printStackTrace()
-                Log.d("Debug", "ЛОХ")
+                Log.d("Debug", "F5")
             }
             .onEach { location ->
                 Log.d("Debug", "МАМА")

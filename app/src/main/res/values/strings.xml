@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Common -->
-    <string name="app_name">Афиша</string>
+    <string name="app_name">Дом Учёных</string>
     <string name="action_try_again">Повторить</string>
 
     <!-- Splash -->
@@ -17,10 +17,15 @@
     <string name="no_data">-</string>
 
     <!-- Affiche post details -->
-    <string name="affiche_post_details_buy">купить билет</string>
+    <string name="affiche_post_details_buy">Купить билет</string>
 
     <!-- Planned -->
     <string name="planned_title">Сохраненные</string>
+
+    <!-- Settings -->
+    <string name="tracking_description">Отслеживание местонажодения</string>
+    <string name="tracking_turn_on">Включить</string>
+    <string name="tracking_turn_off">Отключить</string>
 
     <!-- News -->
     <string name="news_title">Новости</string>
