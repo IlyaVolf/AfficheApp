@@ -12,6 +12,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:name="androidx.navigation.fragment.NavHostFragment"
+        android:color="@color/red_700"
+        app:itemIconTint="@color/red_700"
+        app:itemTextColor="@color/red_700"
         app:navGraph="@navigation/tabs_graph"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +26,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:menu="@menu/tabs_menu"
+        app:itemIconTint="@drawable/bottom_nav_icon_color_selector"
+        app:itemTextColor="@drawable/bottom_nav_icon_color_selector"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

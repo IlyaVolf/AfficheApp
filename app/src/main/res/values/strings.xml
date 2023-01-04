@@ -9,6 +9,12 @@
 
     <!-- Affiche -->
     <string name="affiche_title">Афиша</string>
+    <string name="affiche_about">О событии</string>
+    <string name="affiche_age"></string>
+    <string name="affiche_place">Место проведения</string>
+    <string name="affiche_time">Время</string>
+    <string name="affiche_price">Стоимость</string>
+    <string name="no_data">-</string>
 
     <!-- Affiche post details -->
     <string name="affiche_post_details_buy">купить билет</string>

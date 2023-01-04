@@ -14,6 +14,12 @@ import scientists.house.affiche.app.screens.base.BaseViewModel
 import scientists.house.affiche.app.utils.ObservableHolder
 import scientists.house.affiche.app.utils.logger.Logger
 import scientists.house.affiche.app.utils.share
+import androidx.core.content.ContextCompat.startActivity
+
+import android.content.Intent
+import android.net.Uri
+import androidx.core.content.ContextCompat
+
 
 class AffichePostDetailsViewModel @AssistedInject constructor(
     @Assisted link: String,
@@ -29,7 +35,7 @@ class AffichePostDetailsViewModel @AssistedInject constructor(
     }
 
     fun onBuyButtonClicked(link: String) {
-        // todo open browser
+
     }
 
     fun load(link: String) = viewModelScope.launch(Dispatchers.IO) {

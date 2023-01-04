@@ -82,20 +82,64 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
             .select("span[class=text-lowercase]")
             .text()
 
-        /*val place = element
-            .select("dev[class=srh-factoid-content]")
-            .select("figure")
-            .select("div")
-            .text()*/
-
         val age = element
             .select("div[class=srh-jumbotron-age-rating h1 mb-0]")
             .text()
 
-        val about = element
+        val data = element.select("div[class=srh-factoid-content]").text()
+            .replace("Место проведения", "/")
+            .replace("Время", "/")
+            .replace("Купить билет", "/")
+            .replace("Билет", "/")
+            .split("/")
+
+        val place = data[0].trim()
+        val time = data[1].trim()
+        val price = data[2].trim()
+
+        val buyLink = element.select("div[class=srh-factoid-content]")
+            .select("a")
+            .attr("href")
+
+        val aboutBlocks = element.select("div[style=text-align: justify;]").textNodes()
+        var res = ""
+
+        for (block in aboutBlocks) {
+            res += block.text() + "\n"
+        }
+
+        res = res
+            .replace("\n ".toRegex(), "\n")
+            .replace("\n+".toRegex(), "\n\n")
+
+        val aboutBlocks2 = element
             .select("div[class=srh-blog-item]")
             .select("p")
-            .text()
+            .textNodes()
+
+        var res2 = ""
+
+        for (block in aboutBlocks2) {
+            res2 += block.text() + "\n"
+        }
+
+        res2 = res2
+            .replace("\n ".toRegex(), "\n")
+            .replace("\n+".toRegex(), "\n\n")
+
+        val about = res + res2
+
+        /*var aaas = element.select("div[class=srh-blog-item]").textNodes().filter {
+            it.text().replace("\n+ +".toRegex(), "-") != "-"
+        }
+        var bbb = element.select("div[class=srh-blog-item]").text()
+        var bbbs = mutableListOf<String>()
+
+        for (aaa in aaas) {
+            val aaaas = bbb.split(aaa.text())
+            for (aaaa in aaaas)
+                bbbs.add(aaaa)
+        }*/
 
         return AfficheDetailedPost(
             title = title,
@@ -103,10 +147,10 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
             date = date,
             weekDay = weekDay,
             age = age,
-            place = null,
-            time = null,
-            price = null,
-            buyLink = null,
+            place = place,
+            time = time,
+            price = price,
+            buyLink = buyLink,
             about = about
         )
     }

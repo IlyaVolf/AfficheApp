@@ -29,6 +29,11 @@ import scientists.house.affiche.app.trackLocation.ServiceState
 import scientists.house.affiche.app.trackLocation.getServiceState
 import scientists.house.affiche.app.trackLocation.log
 import java.util.*
+import android.view.Window
+
+import androidx.core.content.ContextCompat
+
+import android.view.WindowManager
 
 
 /**
@@ -64,6 +69,12 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.toolbar)
+
+        val window: Window = this.getWindow()
+
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.red_700))
 
         // preparing root nav controller
         val navController = getRootNavController()

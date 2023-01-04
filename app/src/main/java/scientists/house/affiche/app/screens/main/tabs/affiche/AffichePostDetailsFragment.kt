@@ -1,7 +1,10 @@
 package scientists.house.affiche.app.screens.main.tabs.affiche
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -85,9 +88,9 @@ class AffichePostDetailsFragment : BaseFragment(R.layout.fragment_affiche_post_d
                 fapdMtvDate.visible = false
             }
 
-            data.age?.let {
-                fapdMtvAge.text = it
-            } ?: run {
+            if (data.age != "") {
+                fapdMtvAge.text = data.age
+            } else {
                 fapdMtvAge.visible = false
             }
 
@@ -97,27 +100,32 @@ class AffichePostDetailsFragment : BaseFragment(R.layout.fragment_affiche_post_d
                 fapdIvPost.visible = false
             }
 
-            data.place?.let {
-                fapdMtvPlace.text = it
-            } ?: run {
-                fapdMtvPlace.visible = false
+            aboutPlace.text = getString(R.string.affiche_place)
+            if (data.place != "") {
+                fapdMtvPlace.text = data.place
+            } else {
+                fapdMtvPlace.text = getString(R.string.no_data)
             }
 
-            data.time?.let {
-                fapdMtvTime.text = it
-            } ?: run {
-                fapdMtvTime.visible = false
+            aboutTime.text = getString(R.string.affiche_time)
+            if (data.time != "") {
+                fapdMtvTime.text = data.time
+            } else {
+                fapdMtvTime.text = getString(R.string.no_data)
             }
 
-            data.price?.let {
-                fapdMtvPrice.text = it
-            } ?: run {
-                fapdMtvPrice.visible = false
+            aboutPrice.text = getString(R.string.affiche_price)
+            if (data.price != "") {
+                fapdMtvPrice.text = data.price
+            } else {
+                fapdMtvPrice.text = getString(R.string.no_data)
             }
 
             data.buyLink?.let { link ->
                 fapdMbBuy.setOnClickListener {
-                    viewModel.onBuyButtonClicked(link)
+                    //viewModel.onBuyButtonClicked(link)
+                    val intent = Intent(Intent.ACTION_VIEW).setData(Uri.parse(link))
+                    startActivity(intent)
                 }
             } ?: run {
                 fapdMbBuy.visible = false
@@ -125,8 +133,10 @@ class AffichePostDetailsFragment : BaseFragment(R.layout.fragment_affiche_post_d
 
             data.about?.let {
                 fapdMtvAbout.text = it
+                aboutText.text = getString(R.string.affiche_about)
             } ?: run {
                 fapdMtvAbout.visible = false
+                aboutText.visible = false
             }
         }
     }

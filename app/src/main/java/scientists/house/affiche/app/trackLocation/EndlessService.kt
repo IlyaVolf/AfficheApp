@@ -1,5 +1,6 @@
 package scientists.house.affiche.app.trackLocation
 
+import android.Manifest
 import android.app.AlarmManager
 import android.app.Notification
 import android.app.NotificationChannel
@@ -8,6 +9,7 @@ import android.app.PendingIntent
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.location.Location
 import android.os.Build
@@ -17,6 +19,7 @@ import android.os.PowerManager
 import android.os.SystemClock
 import android.util.Log
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -146,8 +149,8 @@ class EndlessService : Service() {
 
     private fun pingLocation() {
         Log.d("Debug", "pingLocation()")
-//        getLastLocation()
-        getLocation()
+        getLastLocation()
+//        getLocation()
     }
 
     private fun createForegroundNotification(): Notification {
@@ -187,7 +190,6 @@ class EndlessService : Service() {
             .setContentIntent(pendingIntent)
             .setSmallIcon(R.mipmap.ic_launcher)
             .setTicker("Ticker text")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
     }
 
@@ -217,6 +219,23 @@ class EndlessService : Service() {
 
     private fun getLocation() {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         fusedLocationProviderClient.lastLocation
             .addOnSuccessListener { location ->
                 currentLatitude = location.latitude
@@ -228,6 +247,23 @@ class EndlessService : Service() {
     }
 
     private fun getLastLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         fusedLocationProviderClient.lastLocation.addOnCompleteListener { task ->
             val location: Location? = task.result
 
@@ -252,6 +288,23 @@ class EndlessService : Service() {
         locationRequest.fastestInterval = 0
         locationRequest.numUpdates = 1
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
+        if (ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return
+        }
         fusedLocationProviderClient.requestLocationUpdates(
             locationRequest, locationCallback, Looper.myLooper()
         )
@@ -259,8 +312,10 @@ class EndlessService : Service() {
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
-            val lastLocation: Location = locationResult.lastLocation
-            log("You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude)
+            val lastLocation: Location? = locationResult.lastLocation
+            if (lastLocation != null) {
+                log("You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude)
+            }
         }
     }
 
@@ -284,7 +339,7 @@ class EndlessService : Service() {
     }
 
     companion object {
-        const val SECS = 60L
+        const val SECS = 1L
         const val DUSORAN_LATITUDE = 54.836294
         const val DUSORAN_LONGITUDE = 83.102099
 
