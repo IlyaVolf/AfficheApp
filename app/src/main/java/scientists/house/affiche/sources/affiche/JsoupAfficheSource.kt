@@ -151,9 +151,6 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
         val about = stickText(formattedList)
         cleanData()
 
-
-        //aaas.children()[4].select("*")[0].childNodes()
-
         return AfficheDetailedPost(
             title = title,
             imgUrl = imgUrl,
@@ -230,8 +227,10 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
         var res = ""
 
         for (i in list.indices) {
-            if (i < list.size - 1) {
-                res += list[i].trim() + "\n"
+            res += list[i].trim() + if (i < list.size - 1) {
+                list[i].trim() + "\n"
+            } else {
+                list[i].trim()
             }
         }
 
