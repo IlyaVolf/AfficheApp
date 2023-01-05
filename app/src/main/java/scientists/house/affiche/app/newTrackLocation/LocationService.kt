@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import android.widget.TextView
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.android.gms.location.LocationServices
@@ -139,8 +140,8 @@ class LocationService : Service() {
         const val NSU_LATITUDE = 54.843326
         const val NSU_LONGITUDE = 83.089725
 
-        const val HOME_LATITUDE = 54.858454
-        const val HOME_LONGITUDE = 83.113842
+        const val HOME_LATITUDE = 55.080041
+        const val HOME_LONGITUDE = 82.970251
 
         // 0.001 = 111 m
         const val LATITUDE_SPREAD = 0.003
@@ -158,13 +159,16 @@ class LocationService : Service() {
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
 
+    private var locationLatitude = HOME_LATITUDE
+    private var locationLongitude = HOME_LONGITUDE
+
     private var isInArea: Boolean = false
 
     private fun checkCircleArea() {
-        isInArea = if ((currentLatitude <= DUSORAN_LATITUDE + LATITUDE_SPREAD) &&
-            (currentLatitude >= DUSORAN_LATITUDE - LATITUDE_SPREAD) &&
-            (currentLongitude <= DUSORAN_LONGITUDE + LONGITUDE_SPREAD) &&
-            (currentLongitude >= DUSORAN_LONGITUDE - LONGITUDE_SPREAD)
+        isInArea = if ((currentLatitude <= locationLatitude + LATITUDE_SPREAD) &&
+            (currentLatitude >= locationLatitude - LATITUDE_SPREAD) &&
+            (currentLongitude <= locationLongitude + LONGITUDE_SPREAD) &&
+            (currentLongitude >= locationLongitude - LONGITUDE_SPREAD)
         ) {
             Log.d("Debug", "sendNotification")
             if (!isInArea) {

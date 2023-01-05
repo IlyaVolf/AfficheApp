@@ -179,10 +179,10 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
     private fun processText(): MutableList<String> {
         val res = mutableListOf<String>()
 
-        var flag = true
+        var flag = 0
         var counter = 0
         for (i in list.indices) {
-            if (flag) {
+            if (flag == 0) {
                 if (Regex("О событии").matches(list[i])) {
                     continue
                 }
@@ -203,21 +203,39 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                     counter++
                     continue
                 }
+                if (list[i][0] == ',') {
+                    val prev = res.last()
+                    res.removeLast()
+                    res.add(prev + list[i])
+                    continue
+                }
+                if (list[i][0] == '»') {
+                    val prev = res.last()
+                    res.removeLast()
+                    res.add(prev + list[i])
+                    continue
+                }
+                if (list[i].last() == '(') {
+                    res.add(list[i] + list[i+1] + list[i+2])
+                    flag = 2
+                    continue
+                }
                 if (Regex("Продолжительность").containsMatchIn(list[i])) {
                     res.add("")
                     res.add(list[i])
                     continue
                 }
                 if (Regex("–").matches(list[i]) && i > 0 && i < (list.size - 1)) {
+                    val prev = res.last()
                     res.removeLast()
-                    res.add(list[i - 1] + list[i] + list[i + 1])
-                    flag = false
+                    res.add(prev + list[i] + list[i + 1])
+                    flag = 1
                     continue
                 }
                 counter = 0
                 res.add(list[i])
             } else {
-                flag = true
+                flag--
             }
         }
 
