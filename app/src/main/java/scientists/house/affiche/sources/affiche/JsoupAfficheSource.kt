@@ -204,7 +204,8 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                     continue
                 }
                 if (Regex("Продолжительность").containsMatchIn(list[i])) {
-                    res.add("\n" + list[i])
+                    res.add("")
+                    res.add("list[i]")
                     continue
                 }
                 if (Regex("–").matches(list[i]) && i > 0 && i < (list.size - 1)) {
