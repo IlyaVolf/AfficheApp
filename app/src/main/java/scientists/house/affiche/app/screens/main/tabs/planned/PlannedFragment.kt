@@ -11,6 +11,7 @@ import scientists.house.affiche.app.databinding.FragmentPlannedBinding
 import scientists.house.affiche.app.newTrackLocation.LocationService
 import scientists.house.affiche.app.screens.base.BaseFragment
 import scientists.house.affiche.app.trackLocation.log
+import scientists.house.affiche.app.utils.visible
 
 @AndroidEntryPoint
 class PlannedFragment : BaseFragment(R.layout.fragment_planned) {
@@ -24,6 +25,8 @@ class PlannedFragment : BaseFragment(R.layout.fragment_planned) {
         binding = FragmentPlannedBinding.bind(view)
 
         val context = activity!!.applicationContext
+
+        binding.locationDescription.text = getString(R.string.tracking_description)
 
         binding.locationTurnOn.setOnClickListener {
             Intent(context, LocationService::class.java).apply {

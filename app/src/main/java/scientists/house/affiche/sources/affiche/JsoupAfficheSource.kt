@@ -1,13 +1,16 @@
 package scientists.house.affiche.sources.affiche
 
-import javax.inject.Inject
-import javax.inject.Singleton
 import org.jsoup.Jsoup
+import org.jsoup.nodes.Node
+import org.jsoup.nodes.TextNode
 import scientists.house.affiche.app.Consts.DUSORAN_EVENTS_URL
 import scientists.house.affiche.app.Consts.DUSORAN_URL
 import scientists.house.affiche.app.model.affiche.AfficheSource
 import scientists.house.affiche.sources.affiche.entitites.AfficheDetailedPost
 import scientists.house.affiche.sources.affiche.entitites.AffichePost
+import javax.inject.Inject
+import javax.inject.Singleton
+
 
 @Singleton
 class JsoupAfficheSource @Inject constructor() : AfficheSource {
@@ -101,7 +104,7 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
             .select("a")
             .attr("href")
 
-        val aboutBlocks = element.select("div[style=text-align: justify;]").textNodes()
+        /*val aboutBlocks = element.select("div[style=text-align: justify;]").textNodes()
         var res = ""
 
         for (block in aboutBlocks) {
@@ -127,7 +130,7 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
             .replace("\n ".toRegex(), "\n")
             .replace("\n+".toRegex(), "\n\n")
 
-        val about = res + res2
+        val about = res + res2*/
 
         /*var aaas = element.select("div[class=srh-blog-item]").textNodes().filter {
             it.text().replace("\n+ +".toRegex(), "-") != "-"
@@ -141,6 +144,16 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                 bbbs.add(aaaa)
         }*/
 
+        var aaas = element.select("div[class=srh-blog-item]").first()
+
+        traverseTree(aaas)
+        val formattedList = processText()
+        val about = stickText(formattedList)
+        cleanData()
+
+
+        //aaas.children()[4].select("*")[0].childNodes()
+
         return AfficheDetailedPost(
             title = title,
             imgUrl = imgUrl,
@@ -153,5 +166,79 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
             buyLink = buyLink,
             about = about
         )
+    }
+
+    var list: MutableList<String> = mutableListOf()
+
+    private fun traverseTree(aaas: Node) {
+        if (aaas.childNodeSize() == 0 && (aaas as? TextNode) != null) {
+            list.add(aaas.text())
+        }
+        for (child in aaas.childNodes()) {
+            traverseTree(child)
+        }
+    }
+
+    private fun processText(): MutableList<String> {
+        val res = mutableListOf<String>()
+
+        var flag = true
+        var counter = 0
+        for (i in list.indices) {
+            if (flag) {
+                if (Regex("О событии").matches(list[i])) {
+                    continue
+                }
+                if (Regex("Поделиться:").containsMatchIn(list[i])) {
+                    continue
+                }
+                if (Regex(" +").matches(list[i])) {
+                    if (counter == 0 && i != 0 && i != (list.size - 1)) {
+                        res.add(list[i])
+                    }
+                    counter++
+                    continue
+                }
+                if (Regex("\n+").matches(list[i])) {
+                    if (counter == 0 && i != 0 && i != (list.size - 1)) {
+                        res.add(list[i])
+                    }
+                    counter++
+                    continue
+                }
+                if (Regex("Продолжительность").containsMatchIn(list[i])) {
+                    res.add("\n" + list[i])
+                    continue
+                }
+                if (Regex("–").matches(list[i]) && i > 0 && i < (list.size - 1)) {
+                    res.removeLast()
+                    res.add(list[i - 1] + list[i] + list[i + 1])
+                    flag = false
+                    continue
+                }
+                counter = 0
+                res.add(list[i])
+            } else {
+                flag = true
+            }
+        }
+
+        return res
+    }
+
+    private fun stickText(list: MutableList<String>): String {
+        var res = ""
+
+        for (i in list.indices) {
+            if (i < list.size - 1) {
+                res += list[i].trim() + "\n"
+            }
+        }
+
+        return res
+    }
+
+    private fun cleanData() {
+        list.clear()
     }
 }

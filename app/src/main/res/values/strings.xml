@@ -10,7 +10,6 @@
     <!-- Affiche -->
     <string name="affiche_title">Афиша</string>
     <string name="affiche_about">О событии</string>
-    <string name="affiche_age"></string>
     <string name="affiche_place">Место проведения</string>
     <string name="affiche_time">Время</string>
     <string name="affiche_price">Стоимость</string>
@@ -23,7 +22,7 @@
     <string name="planned_title">Сохраненные</string>
 
     <!-- Settings -->
-    <string name="tracking_description">Отслеживание местонажодения</string>
+    <string name="tracking_description">Отслеживание местонахождения</string>
     <string name="tracking_turn_on">Включить</string>
     <string name="tracking_turn_off">Отключить</string>
 

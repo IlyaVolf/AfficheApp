@@ -42,7 +42,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
     private fun drawElements() {
         binding.logo.visible = true
-        binding.pleaseWaitTextView.visible = true
+        binding.pleaseWaitTextView.text = "huy"
         // binding.pleaseWaitTextView2.visible = true
     }
 
