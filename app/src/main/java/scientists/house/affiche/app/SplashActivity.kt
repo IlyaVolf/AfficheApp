@@ -1,13 +1,13 @@
 package scientists.house.affiche.app
 
 import android.os.Bundle
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
-import scientists.house.affiche.app.databinding.ActivitySplashBinding
-import javax.inject.Inject
 import scientists.house.affiche.app.screens.splash.SplashFragment
 import scientists.house.affiche.app.screens.splash.SplashViewModel
-import scientists.house.affiche.app.utils.visible
+import javax.inject.Inject
+
 
 /**
  * Entry point of the app.
@@ -19,10 +19,8 @@ import scientists.house.affiche.app.utils.visible
 class SplashActivity @Inject constructor() : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.SplashActivityStyle)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-
-        //val binding = ActivitySplashBinding.inflate(layoutInflater)
-        //binding.pleaseWaitTextView2.visible = true
     }
 }

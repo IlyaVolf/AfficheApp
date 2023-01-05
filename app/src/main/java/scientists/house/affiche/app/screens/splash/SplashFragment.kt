@@ -10,7 +10,7 @@ import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.FragmentSplashBinding
 import scientists.house.affiche.app.screens.main.MainActivity
 import scientists.house.affiche.app.utils.observeEvent
-import scientists.house.affiche.app.utils.visible
+
 
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
@@ -23,9 +23,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         binding = FragmentSplashBinding.bind(view)
         super.onViewCreated(view, savedInstanceState)
 
-        drawElements()
-
-        renderAnimations()
+        //renderAnimations()
 
         viewModel.launchMainScreenEvent.observeEvent(viewLifecycleOwner) { launchMainScreen() }
     }
@@ -35,16 +33,9 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
 
-        drawElements()
-
         startActivity(intent)
     }
 
-    private fun drawElements() {
-        binding.logo.visible = true
-        binding.pleaseWaitTextView.text = "huy"
-        // binding.pleaseWaitTextView2.visible = true
-    }
 
     private fun renderAnimations() {
         binding.pleaseWaitTextView.alpha = 0f

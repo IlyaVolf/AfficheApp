@@ -8,4 +8,11 @@
                 android:angle="45"/>
         </shape>
     </item>
+
+    <item>
+        <bitmap
+            android:src="@drawable/icon_big"
+            android:gravity="center"/>
+    </item>
+
 </layer-list>
