@@ -11,6 +11,6 @@
         android:textSize="30sp"
         android:layout_gravity="center"
         android:gravity="center"
-        android:text="News fragment" />
+        android:text="В разработке" />
 
 </FrameLayout>

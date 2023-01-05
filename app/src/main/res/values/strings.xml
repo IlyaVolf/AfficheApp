@@ -19,7 +19,7 @@
     <string name="affiche_post_details_buy">Купить билет</string>
 
     <!-- Planned -->
-    <string name="planned_title">Сохраненные</string>
+    <string name="planned_title">Настройки</string>
 
     <!-- Settings -->
     <string name="tracking_description">Отслеживание местонахождения</string>
