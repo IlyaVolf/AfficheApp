@@ -227,7 +227,7 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
         var res = ""
 
         for (i in list.indices) {
-            res += list[i].trim() + if (i < list.size - 1) {
+            res += if (i < list.size - 1) {
                 list[i].trim() + "\n"
             } else {
                 list[i].trim()
