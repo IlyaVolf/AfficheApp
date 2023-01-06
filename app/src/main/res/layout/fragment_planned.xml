@@ -1,16 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".screens.main.tabs.planned.PlannedFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Planned fragment" />
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/location_description"
+        style="@style/TextAppearance.AppCompat.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:textSize="16sp"
+        tools:text="@string/tracking_description" />
 
-</FrameLayout>
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/location_turn_on"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:backgroundTint="@color/red_500"
+        android:text="@string/tracking_turn_on" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/location_turn_off"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:backgroundTint="@color/red_500"
+        android:text="@string/tracking_turn_off" />
+
+</LinearLayout>

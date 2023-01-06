@@ -28,10 +28,6 @@ class AffichePostDetailsViewModel @AssistedInject constructor(
         load(link)
     }
 
-    fun onBuyButtonClicked(link: String) {
-        // todo open browser
-    }
-
     fun load(link: String) = viewModelScope.launch(Dispatchers.IO) {
         try {
             val data = afficheRepository.getDetailedAffiche(link)

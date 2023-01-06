@@ -131,10 +131,10 @@ class NotificationService : Service() {
 
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult) {
-            val lastLocation: Location = locationResult.lastLocation
+            val lastLocation: Location? = locationResult.lastLocation
             Log.d(
                 "Debug:",
-                "You Last Location is : Long: " + lastLocation.longitude + " , Lat: " + lastLocation.latitude
+                "You Last Location is : Long: " + lastLocation!!.longitude + " , Lat: " + lastLocation.latitude
             )
         }
     }
@@ -159,7 +159,7 @@ class NotificationService : Service() {
     }
 
     companion object {
-        const val SECS = 15
+        const val SECS = 1
         const val DUSORAN_LATITUDE = 54.836294
         const val DUSORAN_LONGITUDE = 83.102099
 

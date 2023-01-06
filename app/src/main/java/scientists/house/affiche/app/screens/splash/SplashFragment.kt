@@ -11,6 +11,7 @@ import scientists.house.affiche.app.databinding.FragmentSplashBinding
 import scientists.house.affiche.app.screens.main.MainActivity
 import scientists.house.affiche.app.utils.observeEvent
 
+
 @AndroidEntryPoint
 class SplashFragment : Fragment(R.layout.fragment_splash) {
 
@@ -19,10 +20,10 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
     private val viewModel by viewModels<SplashViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         binding = FragmentSplashBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
 
-        renderAnimations()
+        //renderAnimations()
 
         viewModel.launchMainScreenEvent.observeEvent(viewLifecycleOwner) { launchMainScreen() }
     }
@@ -34,6 +35,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         startActivity(intent)
     }
+
 
     private fun renderAnimations() {
         binding.pleaseWaitTextView.alpha = 0f

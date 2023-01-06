@@ -1,7 +1,11 @@
 package scientists.house.affiche.app.model.news
 
-import scientists.house.affiche.sources.news.entities.NewsItem
+import scientists.house.affiche.sources.news.entities.NewsPost
+import scientists.house.affiche.sources.news.entities.NewsDetailedPost
 
 interface NewsSource {
-    suspend fun getNews(): List<NewsItem>
+
+    suspend fun getNewsPosts(): List<NewsPost>
+
+    suspend fun getDetailedNewsPost(link: String): NewsDetailedPost
 }

@@ -1,4 +1,4 @@
-package scientists.house.affiche.sources.affiche.entitites
+package scientists.house.affiche.sources.affiche.entities
 
 data class AffichePost(
     val title: String?,

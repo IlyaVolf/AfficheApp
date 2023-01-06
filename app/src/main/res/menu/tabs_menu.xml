@@ -4,11 +4,11 @@
     <item android:id="@id/affiche"
         android:title="@string/affiche_title"
         android:icon="@drawable/ic_affiche"/>
-    <item android:id="@id/planned"
-        android:title="@string/planned_title"
-        android:icon="@drawable/ic_planned" />
     <item android:id="@id/news"
         android:title="@string/news_title"
         android:icon="@drawable/ic_news"/>
+    <item android:id="@id/planned"
+        android:title="@string/planned_title"
+        android:icon="@drawable/ic_planned" />
 
 </menu>

@@ -1,6 +1,6 @@
 package scientists.house.affiche.app.model.affiche.entities
 
-import scientists.house.affiche.sources.affiche.entitites.AffichePost as AffichePostSource
+import scientists.house.affiche.sources.affiche.entities.AffichePost as AffichePostSource
 
 data class AffichePost(
     val title: String?,

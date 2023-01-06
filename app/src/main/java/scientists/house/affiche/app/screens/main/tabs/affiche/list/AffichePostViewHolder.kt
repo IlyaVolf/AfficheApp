@@ -1,9 +1,10 @@
 package scientists.house.affiche.app.screens.main.tabs.affiche.list
 
-import scientists.house.affiche.app.databinding.ItemAffichePostBinding
 import scientists.house.affiche.app.extensions.loadImage
-import scientists.house.affiche.app.model.affiche.entities.AffichePost
+
+import scientists.house.affiche.app.databinding.ItemAffichePostBinding
 import scientists.house.affiche.app.screens.base.BaseViewHolder
+import scientists.house.affiche.app.model.affiche.entities.AffichePost
 import scientists.house.affiche.app.utils.visible
 
 class AffichePostViewHolder(

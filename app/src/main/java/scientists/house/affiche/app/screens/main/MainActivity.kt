@@ -1,5 +1,6 @@
 package scientists.house.affiche.app.screens.main
 
+import android.Manifest
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.content.Context
 import android.content.Intent
@@ -29,6 +30,12 @@ import scientists.house.affiche.app.trackLocation.ServiceState
 import scientists.house.affiche.app.trackLocation.getServiceState
 import scientists.house.affiche.app.trackLocation.log
 import java.util.*
+import android.view.Window
+
+import androidx.core.content.ContextCompat
+
+import android.view.WindowManager
+import scientists.house.affiche.app.newTrackLocation.LocationService
 
 
 /**
@@ -65,6 +72,12 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.toolbar)
 
+        /*val window: Window = this.getWindow()
+
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.setStatusBarColor(ContextCompat.getColor(this, R.color.red_700))*/
+
         // preparing root nav controller
         val navController = getRootNavController()
         prepareRootNavController(navController)
@@ -75,8 +88,16 @@ class MainActivity : AppCompatActivity() {
         if (checkPermission().not()) {
             requestPermission()
         }
-        if (checkPermission() && isLocationEnabled()) {
+        /*if (checkPermission() && isLocationEnabled()) {
             actionOnService(Actions.START)
+        }*/
+
+
+        //// new
+        Intent(applicationContext, LocationService::class.java).apply {
+            action = LocationService.ACTION_START
+            startService(this)
+            log("GOGOGO")
         }
     }
 
@@ -173,10 +194,10 @@ class MainActivity : AppCompatActivity() {
         ActivityCompat.requestPermissions(
             this,
             arrayOf(
-                android.Manifest.permission.ACCESS_COARSE_LOCATION,
-                ACCESS_FINE_LOCATION
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
             ),
-            PERMISSION_ID
+            0
         )
     }
 

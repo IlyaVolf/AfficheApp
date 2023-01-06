@@ -9,18 +9,23 @@
         android:id="@+id/newsFragment"
         android:name="scientists.house.affiche.app.screens.main.tabs.news.NewsFragment"
         android:label="@string/news_title"
-        tools:layout="@layout/fragment_news" >
+        tools:layout="@layout/fragment_post_news" >
         <action
-            android:id="@+id/action_affiche_to_newsDetails"
-            app:destination="@id/newsDetailsFragment" />
+            android:id="@+id/action_newsPost_to_newsPostDetails"
+            app:destination="@id/newsPostDetailsFragment" />
     </fragment>
+    <!-- todo post title -->
     <fragment
-        android:id="@+id/newsDetailsFragment"
-        android:name="scientists.house.affiche.app.screens.main.tabs.news.NewsDetailsFragment"
-        android:label="{newsItemTitle}"
-        tools:layout="@layout/fragment_news_details">
+        android:id="@+id/newsPostDetailsFragment"
+        android:name="scientists.house.affiche.app.screens.main.tabs.news.NewsPostDetailsFragment"
+        android:label="@string/news_element"
+        tools:layout="@layout/fragment_news_post_details">
         <argument
-            android:name="newsItemTitle"
+            android:id="@+id/newsPostTitle"
+            android:name="postTitle"
+            app:argType="string" />
+        <argument
+            android:name="postLink"
             app:argType="string" />
     </fragment>
 
