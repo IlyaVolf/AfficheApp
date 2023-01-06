@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="16dp"
-    android:layout_marginHorizontal="16dp"
-    android:layout_marginBottom="16dp">
+    android:layout_marginVertical="16dp"
+    android:layout_marginHorizontal="8dp">
 
     <ImageView
         android:id="@+id/iapfIvPost"
@@ -37,7 +36,7 @@
         style="@style/TextAppearance.MaterialComponents.Body2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:gravity="center"
         android:textColor="@color/grey"
         app:layout_constraintEnd_toEndOf="@id/iapfIvPost"

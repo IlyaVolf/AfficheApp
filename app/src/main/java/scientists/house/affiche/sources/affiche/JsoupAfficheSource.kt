@@ -6,8 +6,8 @@ import org.jsoup.nodes.TextNode
 import scientists.house.affiche.app.Consts.DUSORAN_EVENTS_URL
 import scientists.house.affiche.app.Consts.DUSORAN_URL
 import scientists.house.affiche.app.model.affiche.AfficheSource
-import scientists.house.affiche.sources.affiche.entitites.AfficheDetailedPost
-import scientists.house.affiche.sources.affiche.entitites.AffichePost
+import scientists.house.affiche.sources.affiche.entities.AfficheDetailedPost
+import scientists.house.affiche.sources.affiche.entities.AffichePost
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -60,7 +60,6 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
         return affichePosts
     }
 
-    // todo
     override suspend fun getDetailedAffichePost(link: String): AfficheDetailedPost {
         val document = Jsoup.connect(link).get()
         val element = document.select("section[class=srh-event -detail]")

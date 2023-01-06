@@ -1,4 +1,4 @@
-package scientists.house.affiche.app.screens.main.tabs.affiche
+package scientists.house.affiche.app.screens.main.tabs.news
 
 import androidx.lifecycle.viewModelScope
 import dagger.assisted.Assisted
@@ -8,21 +8,21 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import scientists.house.affiche.app.model.DataHolder
-import scientists.house.affiche.app.model.affiche.AfficheRepository
-import scientists.house.affiche.app.model.affiche.entities.AfficheDetailedPost
+import scientists.house.affiche.app.model.news.entities.NewsDetailedPost
+import scientists.house.affiche.app.model.news.NewsRepository
 import scientists.house.affiche.app.screens.base.BaseViewModel
 import scientists.house.affiche.app.utils.ObservableHolder
 import scientists.house.affiche.app.utils.logger.Logger
 import scientists.house.affiche.app.utils.share
 
-class AffichePostDetailsViewModel @AssistedInject constructor(
+class NewsPostDetailsViewModel @AssistedInject constructor(
     @Assisted link: String,
-    private val afficheRepository: AfficheRepository,
+    private val newsRepository: NewsRepository,
     logger: Logger
 ) : BaseViewModel(logger) {
 
-    private val _afficheDetailedPost = ObservableHolder<AfficheDetailedPost>(DataHolder.loading())
-    val afficheDetailedPost = _afficheDetailedPost.share()
+    private val _newsDetailedPost = ObservableHolder<NewsDetailedPost>(DataHolder.loading())
+    val newsDetailedPost = _newsDetailedPost.share()
 
     init {
         load(link)
@@ -30,19 +30,19 @@ class AffichePostDetailsViewModel @AssistedInject constructor(
 
     fun load(link: String) = viewModelScope.launch(Dispatchers.IO) {
         try {
-            val data = afficheRepository.getDetailedAffiche(link)
+            val data = newsRepository.getDetailedNews(link)
             withContext(Dispatchers.Main) {
-                _afficheDetailedPost.value = DataHolder.ready(data)
+                _newsDetailedPost.value = DataHolder.ready(data)
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                _afficheDetailedPost.value = DataHolder.error(e)
+                _newsDetailedPost.value = DataHolder.error(e)
             }
         }
     }
 
     @AssistedFactory
     interface Factory {
-        fun create(link: String): AffichePostDetailsViewModel
+        fun create(link: String): NewsPostDetailsViewModel
     }
 }

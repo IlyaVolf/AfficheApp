@@ -159,8 +159,8 @@ class LocationService : Service() {
     private var currentLatitude: Double = 0.0
     private var currentLongitude: Double = 0.0
 
-    private var locationLatitude = HOME_LATITUDE
-    private var locationLongitude = HOME_LONGITUDE
+    private var locationLatitude = DUSORAN_LATITUDE
+    private var locationLongitude = DUSORAN_LONGITUDE
 
     private var isInArea: Boolean = false
 

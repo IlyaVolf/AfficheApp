@@ -1,7 +1,7 @@
 package scientists.house.affiche.app.model.affiche
 
-import scientists.house.affiche.sources.affiche.entitites.AfficheDetailedPost
-import scientists.house.affiche.sources.affiche.entitites.AffichePost
+import scientists.house.affiche.sources.affiche.entities.AfficheDetailedPost
+import scientists.house.affiche.sources.affiche.entities.AffichePost
 
 interface AfficheSource {
 

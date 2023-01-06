@@ -28,6 +28,7 @@
 
     <!-- News -->
     <string name="news_title">Новости</string>
+    <string name="news_element">Новость</string>
 
     <!-- News details -->
     <string name="news_details_title">{newsItemTitle}</string>

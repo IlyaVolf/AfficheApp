@@ -1,6 +1,6 @@
 package scientists.house.affiche.sources.affiche
 
-import scientists.house.affiche.sources.affiche.entitites.AffichePost
+import scientists.house.affiche.sources.affiche.entities.AffichePost
 
 interface AfficheApi {
 
