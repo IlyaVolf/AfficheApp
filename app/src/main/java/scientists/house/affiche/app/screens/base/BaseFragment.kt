@@ -21,5 +21,12 @@ abstract class BaseFragment(@LayoutRes layoutId: Int) : Fragment(layoutId) {
         viewModel.showErrorMessageResEvent.observeEvent(viewLifecycleOwner) {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
+
+        setupViews()
+        observeViewModel()
     }
+
+    open fun setupViews() {}
+
+    open fun observeViewModel() {}
 }

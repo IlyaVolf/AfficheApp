@@ -1,24 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="scientists.house.affiche.app.screens.main.tabs.affiche.AfficheFragment">
 
-    <TextView
+    <LinearLayout
+        android:id="@+id/faClContent"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:textSize="30sp"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text="Affiche fragment" />
+        android:layout_marginHorizontal="12dp"
+        android:orientation="vertical">
 
-    <scientists.house.affiche.app.views.ResultView
-        android:id="@+id/resultView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_gravity="center" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/faRvAffichePosts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_affiche_post"/>
 
-</FrameLayout>
+    </LinearLayout>
+
+    <include
+        android:id="@+id/faILoading"
+        layout="@layout/view_loading"
+        android:visibility="gone" />
+
+    <include
+        android:id="@+id/faIError"
+        layout="@layout/view_error"
+        android:visibility="gone" />
+
+</LinearLayout>

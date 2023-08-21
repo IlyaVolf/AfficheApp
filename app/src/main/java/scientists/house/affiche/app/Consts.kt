@@ -1,5 +1,6 @@
 package scientists.house.affiche.app
 
 object Consts {
-    const val BASE_URL = "https://www.youtube.com/"
+    const val DUSORAN_URL = "https://www.dusoran.ru"
+    const val DUSORAN_EVENTS_URL = "https://www.dusoran.ru/events/"
 }

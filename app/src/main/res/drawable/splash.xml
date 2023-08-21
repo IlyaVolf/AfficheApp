@@ -3,9 +3,16 @@
     <item>
         <shape android:shape="rectangle">
             <gradient
-                android:startColor="#6789ab"
-                android:endColor="#0000ff"
+                android:startColor="#391010"
+                android:endColor="@color/red_700"
                 android:angle="45"/>
         </shape>
     </item>
+
+    <item>
+        <bitmap
+            android:src="@drawable/icon_big"
+            android:gravity="center"/>
+    </item>
+
 </layer-list>

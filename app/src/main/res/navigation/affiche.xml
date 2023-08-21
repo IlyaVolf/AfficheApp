@@ -11,16 +11,20 @@
         android:label="@string/affiche_title"
         tools:layout="@layout/fragment_affiche">
         <action
-            android:id="@+id/action_dashboardFragment_to_boxFragment"
+            android:id="@+id/action_affichePost_to_affichePostDetails"
             app:destination="@id/affichePostDetailsFragment" />
     </fragment>
+    <!-- todo post title -->
     <fragment
         android:id="@+id/affichePostDetailsFragment"
         android:name="scientists.house.affiche.app.screens.main.tabs.affiche.AffichePostDetailsFragment"
-        android:label="@string/affiche_post_details_title"
+        android:label="О мероприятии"
         tools:layout="@layout/fragment_affiche_post_details">
         <argument
             android:name="postTitle"
+            app:argType="string" />
+        <argument
+            android:name="postLink"
             app:argType="string" />
     </fragment>
 </navigation>

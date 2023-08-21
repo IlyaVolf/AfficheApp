@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Common -->
-    <string name="app_name">Афиша</string>
+    <string name="app_name">Дом Учёных</string>
     <string name="action_try_again">Повторить</string>
 
     <!-- Splash -->
@@ -9,15 +9,26 @@
 
     <!-- Affiche -->
     <string name="affiche_title">Афиша</string>
+    <string name="affiche_about">О событии</string>
+    <string name="affiche_place">Место проведения</string>
+    <string name="affiche_time">Время</string>
+    <string name="affiche_price">Стоимость</string>
+    <string name="no_data">-</string>
 
     <!-- Affiche post details -->
-    <string name="affiche_post_details_title">{postTitle}</string>
+    <string name="affiche_post_details_buy">Купить билет</string>
 
     <!-- Planned -->
-    <string name="planned_title">Сохраненные</string>
+    <string name="planned_title">Настройки</string>
+
+    <!-- Settings -->
+    <string name="tracking_description">Отслеживание местонахождения</string>
+    <string name="tracking_turn_on">Включить</string>
+    <string name="tracking_turn_off">Отключить</string>
 
     <!-- News -->
     <string name="news_title">Новости</string>
+    <string name="news_element">Новость</string>
 
     <!-- News details -->
     <string name="news_details_title">{newsItemTitle}</string>
@@ -25,5 +36,9 @@
     <!-- Network errors -->
     <string name="network_connection_error">Невозможно подключиться к серверу</string>
     <string name="network_internal_error">Внутрення ошибка. Пожалуйста, повторите позже</string>
+
+    <!-- Errors -->
+    <string name="error_default_load_error_body">Проверьте соединение с интернетом или зайдите позже</string>
+    <string name="error_loading">Ошибка при загрузке</string>
 
 </resources>

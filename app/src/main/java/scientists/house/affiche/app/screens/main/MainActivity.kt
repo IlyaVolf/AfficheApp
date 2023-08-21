@@ -2,7 +2,6 @@ package scientists.house.affiche.app.screens.main
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -10,19 +9,19 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.ActivityMainBinding
 import scientists.house.affiche.app.screens.main.tabs.TabsFragment
+import java.util.*
+
 
 /**
  * Container for all screens in the app.
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    // view-model is used for observing username to be displayed in the toolbar
-    private val viewModel by viewModels<MainActivityViewModel>()
 
     // nav controller of the current screen
     private var navController: NavController? = null
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
-        setSupportActionBar(binding.toolbar)
+            setSupportActionBar(binding.toolbar)
 
         // preparing root nav controller
         val navController = getRootNavController()
@@ -55,6 +54,7 @@ class MainActivity : AppCompatActivity() {
         onNavControllerActivated(navController)
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
+
     }
 
     override fun onDestroy() {
@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val destinationListener =
-        NavController.OnDestinationChangedListener { _, destination, arguments ->
+        NavController.OnDestinationChangedListener { _, destination, _ ->
             supportActionBar?.title = destination.label
             supportActionBar?.setDisplayHomeAsUpEnabled(!isStartDestination(destination))
         }
@@ -110,4 +110,6 @@ class MainActivity : AppCompatActivity() {
     private fun getMainNavigationGraphId(): Int = R.navigation.main_graph
 
     private fun getTabsDestination(): Int = R.id.tabsFragment
+
+
 }
