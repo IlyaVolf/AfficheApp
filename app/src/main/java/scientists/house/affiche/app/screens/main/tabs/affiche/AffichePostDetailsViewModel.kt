@@ -7,7 +7,7 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import scientists.house.affiche.app.model.DataHolder
+import scientists.house.affiche.app.utils.DataHolder
 import scientists.house.affiche.app.model.affiche.AfficheRepository
 import scientists.house.affiche.app.model.affiche.entities.AfficheDetailedPost
 import scientists.house.affiche.app.screens.base.BaseViewModel

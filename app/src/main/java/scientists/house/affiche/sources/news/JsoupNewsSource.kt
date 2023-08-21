@@ -1,19 +1,21 @@
 package scientists.house.affiche.sources.news
 
+import android.util.Log
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
+import scientists.house.affiche.app.Consts.DUSORAN_URL
 import scientists.house.affiche.app.State
 import javax.inject.Inject
 import javax.inject.Singleton
 import scientists.house.affiche.app.model.news.NewsSource
-import scientists.house.affiche.sources.news.entities.NewsDetailedPost
-import scientists.house.affiche.sources.news.entities.NewsPost
+import scientists.house.affiche.sources.news.entities.NewsDetailedPostDataEntity
+import scientists.house.affiche.sources.news.entities.NewsPostDataEntity
 
 @Singleton
 class JsoupNewsSource @Inject constructor() : NewsSource {
 
-    override suspend fun getNewsPosts(): List<NewsPost> {
-        val newsPosts = mutableListOf<NewsPost>()
+    override suspend fun getNewsPosts(): List<NewsPostDataEntity> {
+        val newsPostDataEntities = mutableListOf<NewsPostDataEntity>()
 
         val document = Jsoup.connect(State.DUSORAN_NEWS_URL).get()
         val elements = document.select("article[class=srh-blog-item]")
@@ -44,23 +46,22 @@ class JsoupNewsSource @Inject constructor() : NewsSource {
 
             val pagesLink =
                 pageElements.select("li[class=page-item disabled] , li[class=page-item]")
-            var prevPageLink = pagesLink.first().select("a")
-                .attr("href")
+
+            var prevPageLink = pagesLink.first().select("a").attr("href")
             prevPageLink = if (prevPageLink == "#") {
                 ""
             } else {
-                "https://www.dusoran.ru$prevPageLink"
+                "$DUSORAN_URL$prevPageLink"
             }
 
-            var nextPageLink = pagesLink.last().select("a")
-                .attr("href")
+            var nextPageLink = pagesLink.last().select("a").attr("href")
             nextPageLink = if (nextPageLink == "#") {
                 ""
             } else {
-                "https://www.dusoran.ru$nextPageLink"
+                "$DUSORAN_URL$nextPageLink"
             }
 
-            val newsPost = NewsPost(
+            val newsPostDataEntity = NewsPostDataEntity(
                 title = title,
                 text = text,
                 date = date,
@@ -70,13 +71,13 @@ class JsoupNewsSource @Inject constructor() : NewsSource {
                 page = page
             )
 
-            newsPosts.add(newsPost)
+            newsPostDataEntities.add(newsPostDataEntity)
         }
 
-        return newsPosts
+        return newsPostDataEntities
     }
 
-    override suspend fun getDetailedNewsPost(link: String): NewsDetailedPost {
+    override suspend fun getDetailedNewsPost(link: String): NewsDetailedPostDataEntity {
         val document = Jsoup.connect(link).get()
         val elements = document.select("article[class=srh-blog-item]")
 
@@ -103,10 +104,16 @@ class JsoupNewsSource @Inject constructor() : NewsSource {
 
         val about = stickText(res)
 
-        return NewsDetailedPost(
+        val allImgs = document.select("img").mapNotNull { it.attr("src") }
+        val photos = allImgs.filter {
+            it.startsWith("/upload")
+        }.map { "$DUSORAN_URL$it" }
+
+        return NewsDetailedPostDataEntity(
             title = title,
             about = about,
             date = date,
+            photos = photos
         )
     }
 

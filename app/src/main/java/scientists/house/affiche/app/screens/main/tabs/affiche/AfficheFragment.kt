@@ -1,16 +1,15 @@
 package scientists.house.affiche.app.screens.main.tabs.affiche
 
-import android.os.Bundle
-import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.FragmentAfficheBinding
-import scientists.house.affiche.app.model.DataHolder
+import scientists.house.affiche.app.utils.DataHolder
 import scientists.house.affiche.app.model.affiche.entities.AffichePost
 import scientists.house.affiche.app.screens.base.BaseFragment
 import scientists.house.affiche.app.screens.main.tabs.affiche.list.AfficheAdapter
+import scientists.house.affiche.app.utils.viewBinding
 import scientists.house.affiche.app.utils.visible
 
 @AndroidEntryPoint
@@ -18,7 +17,7 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
 
     override val viewModel by viewModels<AfficheViewModel>()
 
-    private lateinit var binding: FragmentAfficheBinding
+    private val binding by viewBinding<FragmentAfficheBinding>()
 
     private val onItemClick: (AffichePost) -> Unit = { affichePost ->
         val direction = AfficheFragmentDirections.actionAffichePostToAffichePostDetails(
@@ -30,11 +29,6 @@ class AfficheFragment : BaseFragment(R.layout.fragment_affiche) {
 
     private val adapter by lazy(LazyThreadSafetyMode.NONE) {
         AfficheAdapter(onItemClick)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentAfficheBinding.bind(view)
-        super.onViewCreated(view, savedInstanceState)
     }
 
     override fun observeViewModel() {

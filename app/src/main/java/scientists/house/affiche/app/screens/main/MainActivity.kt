@@ -1,18 +1,8 @@
 package scientists.house.affiche.app.screens.main
 
-import android.Manifest
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.content.Context
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.LocationManager
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
@@ -24,18 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.ActivityMainBinding
 import scientists.house.affiche.app.screens.main.tabs.TabsFragment
-import scientists.house.affiche.app.trackLocation.Actions
-import scientists.house.affiche.app.trackLocation.EndlessService
-import scientists.house.affiche.app.trackLocation.ServiceState
-import scientists.house.affiche.app.trackLocation.getServiceState
-import scientists.house.affiche.app.trackLocation.log
 import java.util.*
-import android.view.Window
-
-import androidx.core.content.ContextCompat
-
-import android.view.WindowManager
-import scientists.house.affiche.app.newTrackLocation.LocationService
 
 
 /**
@@ -43,9 +22,6 @@ import scientists.house.affiche.app.newTrackLocation.LocationService
  */
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    // view-model is used for observing username to be displayed in the toolbar
-    private val viewModel by viewModels<MainActivityViewModel>()
 
     // nav controller of the current screen
     private var navController: NavController? = null
@@ -70,13 +46,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
-        setSupportActionBar(binding.toolbar)
-
-        /*val window: Window = this.getWindow()
-
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.setStatusBarColor(ContextCompat.getColor(this, R.color.red_700))*/
+            setSupportActionBar(binding.toolbar)
 
         // preparing root nav controller
         val navController = getRootNavController()
@@ -85,34 +55,6 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentListener, true)
 
-        if (checkPermission().not()) {
-            requestPermission()
-        }
-        /*if (checkPermission() && isLocationEnabled()) {
-            actionOnService(Actions.START)
-        }*/
-
-
-        //// new
-        Intent(applicationContext, LocationService::class.java).apply {
-            action = LocationService.ACTION_START
-            startService(this)
-            log("GOGOGO")
-        }
-    }
-
-    private fun actionOnService(action: Actions) {
-        if (getServiceState(this) == ServiceState.STOPPED && action == Actions.STOP) return
-        Intent(this, EndlessService::class.java).also {
-            it.action = action.name
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                log("Starting the service in >=26 Mode")
-                startForegroundService(it)
-                return
-            }
-            log("Starting the service in < 26 Mode")
-            startService(it)
-        }
     }
 
     override fun onDestroy() {
@@ -153,7 +95,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private val destinationListener =
-        NavController.OnDestinationChangedListener { _, destination, arguments ->
+        NavController.OnDestinationChangedListener { _, destination, _ ->
             supportActionBar?.title = destination.label
             supportActionBar?.setDisplayHomeAsUpEnabled(!isStartDestination(destination))
         }
@@ -169,60 +111,5 @@ class MainActivity : AppCompatActivity() {
 
     private fun getTabsDestination(): Int = R.id.tabsFragment
 
-    private fun checkPermission(): Boolean {
-        //this function will return a boolean
-        //true: if we have permission
-        //false if not
-        if (
-            ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED ||
-            ActivityCompat.checkSelfPermission(
-                this,
-                ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            return true
-        }
 
-        return false
-    }
-
-    private fun requestPermission() {
-        //this function will allows us to tell the user to requesut the necessary permsiion if they are not garented
-        ActivityCompat.requestPermissions(
-            this,
-            arrayOf(
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.ACCESS_FINE_LOCATION,
-            ),
-            0
-        )
-    }
-
-    private fun isLocationEnabled(): Boolean {
-        //this function will return to us the state of the location service
-        //if the gps or the network provider is enabled then it will return true otherwise it will return false
-        val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) || locationManager.isProviderEnabled(
-            LocationManager.NETWORK_PROVIDER
-        )
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == PERMISSION_ID) {
-            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                Log.d("Debug:", "You have the Permission")
-            }
-        }
-    }
-
-    companion object {
-        const val PERMISSION_ID = 123
-    }
 }

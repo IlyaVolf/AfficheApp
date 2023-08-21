@@ -1,7 +1,6 @@
 package scientists.house.affiche.app
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint
 import scientists.house.affiche.app.screens.splash.SplashFragment

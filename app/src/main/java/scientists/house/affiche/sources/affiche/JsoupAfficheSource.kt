@@ -6,8 +6,8 @@ import org.jsoup.nodes.TextNode
 import scientists.house.affiche.app.Consts.DUSORAN_EVENTS_URL
 import scientists.house.affiche.app.Consts.DUSORAN_URL
 import scientists.house.affiche.app.model.affiche.AfficheSource
-import scientists.house.affiche.sources.affiche.entities.AfficheDetailedPost
-import scientists.house.affiche.sources.affiche.entities.AffichePost
+import scientists.house.affiche.sources.affiche.entities.AfficheDetailedPostDataEntity
+import scientists.house.affiche.sources.affiche.entities.AffichePostDataEntity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -15,8 +15,8 @@ import javax.inject.Singleton
 @Singleton
 class JsoupAfficheSource @Inject constructor() : AfficheSource {
 
-    override suspend fun getAffichePosts(): List<AffichePost> {
-        val affichePosts = mutableListOf<AffichePost>()
+    override suspend fun getAffichePosts(): List<AffichePostDataEntity> {
+        val affichePostDataEntities = mutableListOf<AffichePostDataEntity>()
 
         val document = Jsoup.connect(DUSORAN_EVENTS_URL).get()
         val elements = document.select("div[class=srh-card-event]")
@@ -46,7 +46,7 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                 .attr("href")
                 .let { url -> "$DUSORAN_URL$url" }
 
-            val affichePost = AffichePost(
+            val affichePostDataEntity = AffichePostDataEntity(
                 title = title,
                 imgUrl = imgUrl,
                 number = number,
@@ -54,13 +54,13 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                 detailsLink = detailsLink
             )
 
-            affichePosts.add(affichePost)
+            affichePostDataEntities.add(affichePostDataEntity)
         }
 
-        return affichePosts
+        return affichePostDataEntities
     }
 
-    override suspend fun getDetailedAffichePost(link: String): AfficheDetailedPost {
+    override suspend fun getDetailedAffichePost(link: String): AfficheDetailedPostDataEntity {
         val document = Jsoup.connect(link).get()
         val element = document.select("section[class=srh-event -detail]")
 
@@ -143,14 +143,14 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                 bbbs.add(aaaa)
         }*/
 
-        var aaas = element.select("div[class=srh-blog-item]").first()
+        val tree = element.select("div[class=srh-blog-item]").first()
 
-        traverseTree(aaas)
+        traverseTree(tree)
         val formattedList = processText()
         val about = stickText(formattedList)
         cleanData()
 
-        return AfficheDetailedPost(
+        return AfficheDetailedPostDataEntity(
             title = title,
             imgUrl = imgUrl,
             date = date,

@@ -45,21 +45,24 @@
                 android:drawableLeft="@drawable/ic_baseline_keyboard_arrow_left_24"
                 android:textSize="11sp"
                 app:backgroundTint="@color/light_grey"
-                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <Button
                 android:id="@+id/fnewsMbNext"
                 android:layout_width="64dp"
                 android:layout_height="32dp"
                 android:layout_marginRight="16dp"
+
                 android:background="@drawable/rounded_button"
                 android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
                 app:backgroundTint="@color/light_grey"
-                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

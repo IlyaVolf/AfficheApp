@@ -2,17 +2,16 @@ package scientists.house.affiche.app.screens.main.tabs.affiche
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
-import android.view.View
 import androidx.navigation.fragment.navArgs
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import scientists.house.affiche.app.R
 import scientists.house.affiche.app.databinding.FragmentAffichePostDetailsBinding
 import scientists.house.affiche.app.extensions.loadImage
-import scientists.house.affiche.app.model.DataHolder
+import scientists.house.affiche.app.utils.DataHolder
 import scientists.house.affiche.app.model.affiche.entities.AfficheDetailedPost
 import scientists.house.affiche.app.screens.base.BaseFragment
+import scientists.house.affiche.app.utils.viewBinding
 import scientists.house.affiche.app.utils.viewModelCreator
 import scientists.house.affiche.app.utils.visible
 
@@ -25,14 +24,9 @@ class AffichePostDetailsFragment : BaseFragment(R.layout.fragment_affiche_post_d
         factory.create(args.postLink)
     }
 
-    private lateinit var binding: FragmentAffichePostDetailsBinding
+    private val binding by viewBinding<FragmentAffichePostDetailsBinding>()
 
     private val args by navArgs<AffichePostDetailsFragmentArgs>()
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentAffichePostDetailsBinding.bind(view)
-        super.onViewCreated(view, savedInstanceState)
-    }
 
     override fun setupViews() {
         super.setupViews()

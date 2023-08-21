@@ -1,4 +1,4 @@
-package scientists.house.affiche.app.model
+package scientists.house.affiche.app.utils
 
 import kotlin.Result
 

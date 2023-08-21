@@ -9,36 +9,4 @@
     tools:background="@drawable/splash"
     tools:context="scientists.house.affiche.app.screens.splash.SplashFragment">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="256dp"
-        android:layout_height="128dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/icon_big" />
-
-    <TextView
-        android:id="@+id/pleaseWaitTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:text="Дом учёных"/>
-
-    <TextView
-        android:id="@+id/pleaseWaitTextView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="14sp"
-        android:fontFamily="casual"
-        android:gravity="center"
-        android:layout_gravity="center"
-        android:textColor="@color/white"
-        android:text="Учебный проект"/>
-
 </LinearLayout>

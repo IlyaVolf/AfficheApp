@@ -36,13 +36,4 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         startActivity(intent)
     }
 
-
-    private fun renderAnimations() {
-        binding.pleaseWaitTextView.alpha = 0f
-        binding.pleaseWaitTextView.animate()
-            .alpha(1f)
-            .setStartDelay(500)
-            .setDuration(1000)
-            .start()
-    }
 }

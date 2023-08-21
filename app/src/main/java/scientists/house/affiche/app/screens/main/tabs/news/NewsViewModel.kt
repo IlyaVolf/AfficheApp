@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import scientists.house.affiche.app.model.DataHolder
+import scientists.house.affiche.app.utils.DataHolder
 import scientists.house.affiche.app.model.news.NewsRepository
 import scientists.house.affiche.app.model.news.entities.NewsPost
 import scientists.house.affiche.app.screens.base.BaseViewModel

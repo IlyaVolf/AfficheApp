@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginHorizontal="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="16dp"
     android:orientation="vertical"
     tools:context=".screens.main.tabs.news.NewsPostDetailsFragment">
 
@@ -49,6 +50,20 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 tools:text="новость" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photosRv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:spanCount="1"
+                tools:listitem="@layout/item_news_photo" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="24dp"/>
 
         </LinearLayout>
 

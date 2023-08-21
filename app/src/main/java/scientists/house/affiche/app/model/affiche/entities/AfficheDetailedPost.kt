@@ -1,7 +1,5 @@
 package scientists.house.affiche.app.model.affiche.entities
 
-import scientists.house.affiche.sources.affiche.entities.AfficheDetailedPost as AfficheDetailedPostSource
-
 data class AfficheDetailedPost(
     val title: String?,
     val imgUrl: String?,
@@ -16,17 +14,3 @@ data class AfficheDetailedPost(
 ) {
     val performanceDate get() = "${number.orEmpty()} ${month.orEmpty()}".trim().ifEmpty { null }
 }
-
-fun AfficheDetailedPostSource.toUiAfficheDetailedPosts(): AfficheDetailedPost =
-    AfficheDetailedPost(
-        title = title,
-        imgUrl = imgUrl,
-        number = date,
-        month = weekDay,
-        age = age,
-        place = place,
-        time = time,
-        price = price,
-        buyLink = buyLink,
-        about = about
-    )
