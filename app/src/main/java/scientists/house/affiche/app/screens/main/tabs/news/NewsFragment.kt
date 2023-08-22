@@ -40,12 +40,12 @@ class NewsFragment : BaseFragment(R.layout.fragment_post_news) {
                 DataHolder.LOADING -> {
                     binding.fnILoading.root.visible = true
                     binding.fnIError.root.visible = false
-                    binding.fnClContent.visible = false
+                    binding.faRvNewsPosts.visible = false
                 }
                 is DataHolder.READY -> {
                     binding.fnILoading.root.visible = false
                     binding.fnIError.root.visible = false
-                    binding.fnClContent.visible = true
+                    binding.faRvNewsPosts.visible = true
 
                     binding.faRvNewsPosts.adapter = adapter
                     adapter.setupItems(holder.data)
@@ -55,7 +55,7 @@ class NewsFragment : BaseFragment(R.layout.fragment_post_news) {
                 is DataHolder.ERROR -> {
                     binding.fnILoading.root.visible = false
                     binding.fnIError.root.visible = true
-                    binding.fnClContent.visible = false
+                    binding.faRvNewsPosts.visible = false
                 }
             }
         }
@@ -70,8 +70,13 @@ class NewsFragment : BaseFragment(R.layout.fragment_post_news) {
 
     override fun setupViews() {
         super.setupViews()
-        binding.fnIError.veMbTryAgain.setOnClickListener {
-            viewModel.load()
+
+        with(binding) {
+            binding.fnewsMbPrev.visible = false
+            binding.fnewsMbNext.visible = false
+            fnIError.veMbTryAgain.setOnClickListener {
+                viewModel.load()
+            }
         }
     }
 

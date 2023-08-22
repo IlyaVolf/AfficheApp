@@ -1,5 +1,6 @@
 package scientists.house.affiche.sources.affiche
 
+import android.util.Log
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Node
 import org.jsoup.nodes.TextNode
@@ -8,11 +9,13 @@ import scientists.house.affiche.app.Consts.DUSORAN_URL
 import scientists.house.affiche.app.model.affiche.AfficheSource
 import scientists.house.affiche.sources.affiche.entities.AfficheDetailedPostDataEntity
 import scientists.house.affiche.sources.affiche.entities.AffichePostDataEntity
+import java.lang.StringBuilder
 import javax.inject.Inject
 import javax.inject.Singleton
 
 
 @Singleton
+// TODO BETA
 class JsoupAfficheSource @Inject constructor() : AfficheSource {
 
     override suspend fun getAffichePosts(): List<AffichePostDataEntity> {
@@ -215,7 +218,7 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
                     continue
                 }
                 if (list[i].last() == '(') {
-                    res.add(list[i] + list[i+1] + list[i+2])
+                    res.add(list[i] + list[i + 1] + list[i + 2])
                     flag = 2
                     continue
                 }
@@ -242,17 +245,19 @@ class JsoupAfficheSource @Inject constructor() : AfficheSource {
     }
 
     private fun stickText(list: MutableList<String>): String {
-        var res = ""
+        val res = StringBuilder()
 
         for (i in list.indices) {
-            res += if (i < list.size - 1) {
-                list[i].trim() + "\n"
-            } else {
-                list[i].trim()
-            }
+            res.append(
+                if (i < list.size - 1) {
+                    list[i].trim() + "\n"
+                } else {
+                    list[i].trim()
+                }
+            )
         }
 
-        return res
+        return res.toString()
     }
 
     private fun cleanData() {
