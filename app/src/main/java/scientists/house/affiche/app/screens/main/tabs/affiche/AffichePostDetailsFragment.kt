@@ -115,10 +115,15 @@ class AffichePostDetailsFragment : BaseFragment(R.layout.fragment_affiche_post_d
             }
 
             data.buyLink?.let { link ->
-                fapdMbBuy.setOnClickListener {
-                    //viewModel.onBuyButtonClicked(link)
-                    val intent = Intent(Intent.ACTION_VIEW).setData(Uri.parse(link))
-                    startActivity(intent)
+                if (link.isBlank()) {
+                    fapdMbBuy.isEnabled = false
+                } else {
+                    fapdMbBuy.isEnabled = true
+                    fapdMbBuy.setOnClickListener {
+                        //viewModel.onBuyButtonClicked(link)
+                        val intent = Intent(Intent.ACTION_VIEW).setData(Uri.parse(link))
+                        startActivity(intent)
+                    }
                 }
             } ?: run {
                 fapdMbBuy.visible = false

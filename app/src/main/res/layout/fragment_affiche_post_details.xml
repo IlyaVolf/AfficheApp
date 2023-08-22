@@ -8,13 +8,6 @@
     android:orientation="vertical"
     tools:context=".screens.main.tabs.affiche.AffichePostDetailsFragment">
 
-    <!--<com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/fapdMtToolbar"
-        style="@style/Widget.MaterialComponents.Toolbar.Primary"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:title="Заголовок афишы" />-->
-
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -223,12 +216,12 @@
                 tools:srcCompat="@tools:sample/avatars" />
 
             <com.google.android.material.button.MaterialButton
+                android:background="@drawable/botton_color_selector"
                 android:id="@+id/fapdMbBuy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/affiche_post_details_buy"
-                app:backgroundTint="@color/red_500" />
+                android:text="@string/affiche_post_details_buy" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/aboutText"
@@ -243,7 +236,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/fapdMtvAbout"
-                style="@style/TextAppearance.AppCompat.Body2"
+                style="@style/Text.Normal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start"

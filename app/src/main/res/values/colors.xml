@@ -12,5 +12,7 @@
     <color name="design_default_color_primary">#B10000</color>
     <color name="design_default_color_primary_dark">#780000</color>
 
+    <color name="ripple">#40000000</color>
+
     <color name="defaultDashboardColor">#008800</color>
 </resources>

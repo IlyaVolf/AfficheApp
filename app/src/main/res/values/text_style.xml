@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Text" parent="TextAppearance.AppCompat"/>
+
+    <style name="Text.Normal">
+        <item name="android:textSize">15sp</item>
+    </style>
+
+</resources>

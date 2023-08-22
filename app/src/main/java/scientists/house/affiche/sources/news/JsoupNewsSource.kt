@@ -10,8 +10,10 @@ import javax.inject.Singleton
 import scientists.house.affiche.app.model.news.NewsSource
 import scientists.house.affiche.sources.news.entities.NewsDetailedPostDataEntity
 import scientists.house.affiche.sources.news.entities.NewsPostDataEntity
+import java.lang.StringBuilder
 
 @Singleton
+// TODO BETA
 class JsoupNewsSource @Inject constructor() : NewsSource {
 
     override suspend fun getNewsPosts(): List<NewsPostDataEntity> {
@@ -118,17 +120,19 @@ class JsoupNewsSource @Inject constructor() : NewsSource {
     }
 
     private fun stickText(list: MutableList<String>): String {
-        var res = ""
+        val res = StringBuilder()
 
         for (i in list.indices) {
-            res += if (i < list.size - 1) {
-                list[i].trim() + "\n\n"
-            } else {
-                list[i].trim()
-            }
+            res.append(
+                if (i < list.size - 1) {
+                    list[i].trim() + "\n\n"
+                } else {
+                    list[i].trim()
+                }
+            )
         }
 
-        return res
+        return res.toString()
     }
 
 }
